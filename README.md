@@ -1,4 +1,7 @@
 # databasesqlite
+Nama : Aninda Tantri A
+Kelas: MI2B 
+NIM  : 1931710099 
 
 A new Flutter project.
 
