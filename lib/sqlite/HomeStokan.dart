@@ -2,28 +2,35 @@ import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
 import 'dart:async';
 import 'DbHelper.dart';
-import 'EntryForm.dart';
-import 'item.dart';
+import 'EntryFormStokan.dart';
+import 'Stok.dart';
 
 //pendukung program asinkron
-class Home extends StatefulWidget {
+class HomeStokan extends StatefulWidget {
   @override
-  HomeState createState() => HomeState();
+  HomeStokanState createState() => HomeStokanState();
 }
 
-class HomeState extends State<Home> {
+class HomeStokanState extends State<HomeStokan> {
   DbHelper dbHelper = DbHelper();
   int count = 0;
-  List<Item> itemList;
+  List<Stok> stokList;
+
+  @override
+  void initState() {
+    super.initState();
+    updateListView();
+  }
+
   @override
   Widget build(BuildContext context) {
-    if (itemList == null) {
-      itemList = List<Item>();
+    if (stokList == null) {
+      stokList = [];
     }
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Gudang Jaringan'),
-      ),
+      // appBar: AppBar(
+      //   title: Text('Gudang Jaringan'),
+      // ),
       body: Column(children: [
         Expanded(
           child: createListView(),
@@ -32,13 +39,12 @@ class HomeState extends State<Home> {
           alignment: Alignment.bottomCenter,
           child: SizedBox(
             width: double.infinity,
-            child: RaisedButton(
-              child: Text("Tambah Item"),
+            child: ElevatedButton(
+              child: Text("Tambah Stok"),
               onPressed: () async {
                 var item = await navigateToEntryForm(context, null);
                 if (item != null) {
-                  //TODO 2 Panggil Fungsi untuk Insert ke DB
-                  int result = await dbHelper.insert(item);
+                  int result = await dbHelper.insertStok(item);
                   if (result > 0) {
                     updateListView();
                   }
@@ -51,7 +57,7 @@ class HomeState extends State<Home> {
     );
   }
 
-  Future<Item> navigateToEntryForm(BuildContext context, Item item) async {
+  Future<Stok> navigateToEntryForm(BuildContext context, Stok item) async {
     var result = await Navigator.push(context,
         MaterialPageRoute(builder: (BuildContext context) {
       return EntryForm(item);
@@ -73,25 +79,22 @@ class HomeState extends State<Home> {
               child: Icon(Icons.ad_units),
             ),
             title: Text(
-              this.itemList[index].name,
+              this.stokList[index].name,
               style: textStyle,
             ),
-            subtitle: Text(this.itemList[index].qty.toString()),
+            subtitle: Text(this.stokList[index].qty.toString()),
             trailing: GestureDetector(
               child: Icon(Icons.delete),
               onTap: () async {
-                dbHelper.delete(this.itemList[index].id);
+                dbHelper.deleteStok(this.stokList[index].id);
 
                 updateListView();
-
-                //TODO 3 Panggil Fungsi untuk Delete dari DB berdasarkan Item
               },
             ),
             onTap: () async {
               var item =
-                  await navigateToEntryForm(context, this.itemList[index]);
-              //TODO 4 Panggil Fungsi untuk Edit data
-              int result = await dbHelper.update(item);
+                  await navigateToEntryForm(context, this.stokList[index]);
+              int result = await dbHelper.updateStok(item);
               if (result > 0) {
                 updateListView();
               }
@@ -106,11 +109,10 @@ class HomeState extends State<Home> {
   void updateListView() {
     final Future<Database> dbFuture = dbHelper.initDb();
     dbFuture.then((database) {
-      //TODO 1 Select data dari DB
-      Future<List<Item>> itemListFuture = dbHelper.getItemList();
+      Future<List<Stok>> itemListFuture = dbHelper.getStokList();
       itemListFuture.then((itemList) {
         setState(() {
-          this.itemList = itemList;
+          this.stokList = itemList;
           this.count = itemList.length;
         });
       });

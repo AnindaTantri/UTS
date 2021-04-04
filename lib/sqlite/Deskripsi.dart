@@ -1,8 +1,8 @@
-class Item {
+class Deskripsi {
   int _id;
   String _name;
   int _serialnumber;
-  int _qty;
+  String _keterangan;
 
   get id => this._id;
 
@@ -12,18 +12,18 @@ class Item {
   get name => this._name;
   set name(value) => this._name = value;
 
-  get qty => this._qty;
-  set qty(value) => this._qty = value;
+  get keterangan => this._keterangan;
+  set keterangan(value) => this._keterangan = value;
 
   // konstruktor versi 1
-  Item(this._name, this._serialnumber, this._qty);
+  Deskripsi(this._name, this._serialnumber, this._keterangan);
 
   // konstruktor versi 2: konversi dari Map ke Item
-  Item.fromMap(Map<String, dynamic> map) {
+  Deskripsi.fromMap(Map<String, dynamic> map) {
     this._id = map['id'];
     this._name = map['name'];
     this._serialnumber = map['serialnumber'];
-    this._qty = map['qty'];
+    this._keterangan = map['keterangan'];
   }
 
   // konversi dari Item ke Map
@@ -32,7 +32,7 @@ class Item {
     map['id'] = this._id;
     map['name'] = name;
     map['serialnumber'] = serialnumber; // memanggil set get
-    map['qty'] = qty;
+    map['keterangan'] = _keterangan;
     return map;
   }
 }

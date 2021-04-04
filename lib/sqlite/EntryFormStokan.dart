@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'item.dart';
+import 'Stok.dart';
 
 class EntryForm extends StatefulWidget {
-  final Item item;
+  final Stok item;
   EntryForm(this.item);
   @override
   EntryFormState createState() => EntryFormState(this.item);
@@ -10,7 +10,7 @@ class EntryForm extends StatefulWidget {
 
 //class controller
 class EntryFormState extends State<EntryForm> {
-  Item item;
+  Stok item;
   EntryFormState(this.item);
   TextEditingController nameController = TextEditingController();
   TextEditingController serialnumberController = TextEditingController();
@@ -91,9 +91,9 @@ class EntryFormState extends State<EntryForm> {
                   children: <Widget>[
                     // tombol simpan
                     Expanded(
-                      child: RaisedButton(
-                        color: Theme.of(context).primaryColorDark,
-                        textColor: Theme.of(context).primaryColorLight,
+                      child: ElevatedButton(
+                        // color: Theme.of(context).primaryColorDark,
+                        // textColor: Theme.of(context).primaryColorLight,
                         child: Text(
                           'Save',
                           textScaleFactor: 1.5,
@@ -101,7 +101,7 @@ class EntryFormState extends State<EntryForm> {
                         onPressed: () {
                           if (item == null) {
                             // tambah data
-                            item = Item(
+                            item = Stok(
                                 nameController.text,
                                 int.parse(serialnumberController.text),
                                 int.parse(qtyController.text));
@@ -122,9 +122,9 @@ class EntryFormState extends State<EntryForm> {
                     ),
                     // tombol batal
                     Expanded(
-                      child: RaisedButton(
-                        color: Theme.of(context).primaryColorDark,
-                        textColor: Theme.of(context).primaryColorLight,
+                      child: ElevatedButton(
+                        // color: Theme.of(context).primaryColorDark,
+                        // textColor: Theme.of(context).primaryColorLight,
                         child: Text(
                           'Cancel',
                           textScaleFactor: 1.5,
