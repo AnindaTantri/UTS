@@ -27,6 +27,7 @@ class EntryFormState extends State<EntryForm> {
     //rubah
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.red,
           title: itemdeskripsi == null ? Text('Tambah') : Text('Ubah'),
           leading: Icon(Icons.keyboard_arrow_left),
         ),
@@ -67,7 +68,7 @@ class EntryFormState extends State<EntryForm> {
                   },
                 ),
               ),
-
+//entry  keterangan item/barang
               Padding(
                 padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
                 child: TextField(
@@ -107,7 +108,7 @@ class EntryFormState extends State<EntryForm> {
                               keteranganController.text,
                             );
                           } else {
-                            // ubah data
+                            // mengubah data
                             itemdeskripsi.serialnumber =
                                 int.parse(serialnumberController.text);
                             itemdeskripsi.name = nameController.text;

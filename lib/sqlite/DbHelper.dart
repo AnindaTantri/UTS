@@ -26,7 +26,7 @@ class DbHelper {
     _createDb(db, newVersion);
   }
 
-  //buat tabel baru dengan nama item
+  //buat tabel baru dengan nama stok dan deskripsi
   void _createDb(Database db, int version) async {
     var batch = db.batch();
     batch.execute('DROP TABLE IF EXISTS stok');
@@ -65,20 +65,21 @@ class DbHelper {
     return mapList;
   }
 
-//create databases
+//fungsi untuk mengisi data pada tabel stok
   Future<int> insertStok(Stok object) async {
     Database db = await this.initDb();
     int count = await db.insert('stok', object.toMap());
     return count;
   }
 
+//fungsi untuk mengisi data pada tabel deskripsi
   Future<int> insertDeskripsi(Deskripsi object) async {
     Database db = await this.initDb();
     int count = await db.insert('deskripsi', object.toMap());
     return count;
   }
 
-//update databases
+//fungsi untuk update data tabel stok
   Future<int> updateStok(Stok object) async {
     Database db = await this.initDb();
     int count = await db
@@ -86,6 +87,7 @@ class DbHelper {
     return count;
   }
 
+//fungsi untuk update data tabel deskripsi
   Future<int> updateDeskripsi(Deskripsi object) async {
     Database db = await this.initDb();
     int count = await db.update('deskripsi', object.toMap(),
@@ -93,19 +95,21 @@ class DbHelper {
     return count;
   }
 
-  //delete databases
+  //fungsi untuk menghapus data tabel stok
   Future<int> deleteStok(int id) async {
     Database db = await this.initDb();
     int count = await db.delete('stok', where: 'id=?', whereArgs: [id]);
     return count;
   }
 
+//fungsi untuk menghapus data tabel deskripsi
   Future<int> deleteDeskripsi(int id) async {
     Database db = await this.initDb();
     int count = await db.delete('deskrpsi', where: 'id=?', whereArgs: [id]);
     return count;
   }
 
+  //fungsi untuk mengembalikan nilai data yang baru dimasukkan
   Future<List<Stok>> getStokList() async {
     var stokMapList = await selectStok();
     int count = stokMapList.length;

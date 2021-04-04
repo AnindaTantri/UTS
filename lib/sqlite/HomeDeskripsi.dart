@@ -31,6 +31,7 @@ class HomeDeskripsiState extends State<HomeDeskripsi> {
       // appBar: AppBar(
       //   title: Text('Gudang Jaringan'),
       // ),
+      backgroundColor: Colors.red,
       body: Column(children: [
         Expanded(
           child: createListView(),
@@ -40,7 +41,7 @@ class HomeDeskripsiState extends State<HomeDeskripsi> {
           child: SizedBox(
             width: double.infinity,
             child: ElevatedButton(
-              child: Text("Tambah Deskripsi"),
+              child: Text("Tambah Deskripsi"), //button tambah deskripsi
               onPressed: () async {
                 var data = await navigateToEntryForm(context, null);
                 if (data != null) {
@@ -66,6 +67,7 @@ class HomeDeskripsiState extends State<HomeDeskripsi> {
     return result;
   }
 
+//list view yang akan ditampilkan
   ListView createListView() {
     TextStyle textStyle = Theme.of(context).textTheme.headline5;
     return ListView.builder(

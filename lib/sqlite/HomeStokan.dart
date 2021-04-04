@@ -31,6 +31,7 @@ class HomeStokanState extends State<HomeStokan> {
       // appBar: AppBar(
       //   title: Text('Gudang Jaringan'),
       // ),
+      backgroundColor: Colors.red,
       body: Column(children: [
         Expanded(
           child: createListView(),
@@ -40,7 +41,7 @@ class HomeStokanState extends State<HomeStokan> {
           child: SizedBox(
             width: double.infinity,
             child: ElevatedButton(
-              child: Text("Tambah Stok"),
+              child: Text("Tambah Stok"), //untuk button tambah stokkan
               onPressed: () async {
                 var item = await navigateToEntryForm(context, null);
                 if (item != null) {
@@ -65,6 +66,7 @@ class HomeStokanState extends State<HomeStokan> {
     return result;
   }
 
+//tampilan pada home stokan list data
   ListView createListView() {
     TextStyle textStyle = Theme.of(context).textTheme.headline5;
     return ListView.builder(
@@ -105,7 +107,7 @@ class HomeStokanState extends State<HomeStokan> {
     );
   }
 
-  //update List item
+  //untuk mengupdate List item
   void updateListView() {
     final Future<Database> dbFuture = dbHelper.initDb();
     dbFuture.then((database) {
