@@ -82,7 +82,9 @@ class HomeDeskripsiState extends State<HomeDeskripsi> {
               child: Icon(Icons.ad_units),
             ),
             title: Text(
-              this.deskripsiList[index].name,
+              this.deskripsiList[index].id.toString() +
+                  "-" +
+                  this.deskripsiList[index].name,
               style: textStyle,
             ),
             subtitle: Text(this.deskripsiList[index].keterangan),

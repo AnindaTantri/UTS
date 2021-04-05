@@ -105,7 +105,7 @@ class DbHelper {
 //fungsi untuk menghapus data tabel deskripsi
   Future<int> deleteDeskripsi(int id) async {
     Database db = await this.initDb();
-    int count = await db.delete('deskrpsi', where: 'id=?', whereArgs: [id]);
+    int count = await db.delete('deskripsi', where: 'id=?', whereArgs: [id]);
     return count;
   }
 

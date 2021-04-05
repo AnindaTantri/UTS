@@ -81,10 +81,12 @@ class HomeStokanState extends State<HomeStokan> {
               child: Icon(Icons.ad_units),
             ),
             title: Text(
-              this.stokList[index].name,
+              this.stokList[index].id.toString() +
+                  "-" +
+                  this.stokList[index].name,
               style: textStyle,
             ),
-            subtitle: Text(this.stokList[index].qty.toString()),
+            subtitle: Text(this.stokList[index].name),
             trailing: GestureDetector(
               child: Icon(Icons.delete),
               onTap: () async {
